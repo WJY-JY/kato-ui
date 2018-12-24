@@ -109,7 +109,7 @@
           const args = this.stub.method.parameters.map(it => {
             const index = this.parameters.findIndex(p => p.name === it.name && p.isSelected);
             if (index !== -1) {
-              return jsonParse(this.parameters[index].value)
+              return jsonParse(this.parameters[index].value);
             }
           });
 
