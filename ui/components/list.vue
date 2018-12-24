@@ -50,7 +50,7 @@
     },
     data() {
       return {
-        modules: this.$api.stub.modules.map(it => ({
+        modules: this.$api.validate.modules.map(it => ({
           isOpened: false,
           ...it
         }))

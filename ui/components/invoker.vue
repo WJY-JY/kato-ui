@@ -93,11 +93,7 @@
       return {
         isLoading: false,
         baseUrl,
-        parameters: this.stub.method.parameters.map(it => ({
-          isSelected: true,
-          name: it.name,
-          value: null
-        })),
+        parameters: this.getParams(),
         result: undefined,
         updateTime: null,
         cost: null
@@ -125,6 +121,22 @@
           this.updateTime = new Date();
           this.cost = this.updateTime.getTime() - start.getTime();
         }
+      },
+      getParams() {
+        let params = this.stub.method.parameters;
+        let validate = this.stub.method.validate;
+        let result = []
+        for (let i = 0; i < params.length; i++) {
+          result.push({
+            isSelected: true,
+            name: params[i].name,
+            value: null,
+            type: validate ? validate[i].type : null,
+            children: validate && validate[i].children ? validate[i].children : null,
+            description: validate ? validate[i].description : null
+          });
+        }
+        return result;
       }
     }
   }

@@ -132,7 +132,7 @@
           return it.type === 'method' && `${it.module.name}.${it.method.name}` === moduleAndMethodName
         }).length <= 0) {
           const [moduleName, methodName] = moduleAndMethodName.split('.');
-          const module = this.$api.stub.modules.filter(it => it.name === moduleName)[0];
+          const module = this.$api.validate.modules.filter(it => it.name === moduleName)[0];
           if (module) {
             const method = module.methods.filter(it => it.name === methodName)[0];
             if (method) {

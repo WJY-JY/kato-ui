@@ -5,6 +5,8 @@
         <tr>
           <th style="width: 50px"></th>
           <th>参数名</th>
+          <th>类型</th>
+          <th>描述</th>
           <th>值</th>
         </tr>
         <tr v-for="param of value"
@@ -15,8 +17,16 @@
               v-model="param.isSelected">
             </el-checkbox>
           </td>
-          <td style="text-align: center;font-weight: bolder">{{param.name}}</td>
-          <td>
+          <td v-if="param.type==='object'" style="text-align: center;font-weight: bolder">
+            <params-object v-model="param.name" :tip="param.children"></params-object>
+          </td>
+          <td v-else style="text-align: center;font-weight: normal">{{param.name}}</td>
+          <td style="text-align: center;font-weight: normal">{{param.type}}</td>
+          <td style="text-align: center;font-weight: normal">{{param.description}}</td>
+          <td v-if="param.type==='date'">
+            <param-date v-model="param.value"/>
+          </td>
+          <td v-else>
             <el-input v-model="param.value"></el-input>
           </td>
         </tr>
@@ -35,8 +45,12 @@
 </template>
 
 <script>
+  import paramsObject from './params-object';
+  import ParamDate from "./param-date";
+
   export default {
     name: "params",
+    components: {ParamDate, paramsObject},
     props: ['value']
   }
 </script>
