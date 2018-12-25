@@ -131,9 +131,9 @@
             isSelected: true,
             name: params[i].name,
             value: null,
-            type: validate ? validate[i].type : null,
-            children: validate && validate[i].children ? validate[i].children : null,
-            description: validate ? validate[i].description : null
+            type: validate && validate.length > i ? validate[i].type : null,
+            children: validate && validate.length > i && validate[i].children ? validate[i].children : null,
+            description: validate && validate.length > i ? validate[i].description : null
           });
         }
         return result;
