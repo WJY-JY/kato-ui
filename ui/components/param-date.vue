@@ -44,7 +44,7 @@
       dateTime: function (nv, ov) {
         if (nv !== ov) {
           // 当日期发生变化的时候，触发
-          this.$emit("input", JSON.stringify(new Date(nv).toISOString()));
+          this.$emit("input", nv ? JSON.stringify(new Date(nv).toISOString()) : null);
         }
       }
     }

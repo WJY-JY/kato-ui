@@ -1,25 +1,64 @@
 <template>
-    <el-popover
-      placement="top-start"
-      width="400"
-      trigger="hover">
-      <el-table :data="gridData">
-        <el-table-column  property="key" label="key"></el-table-column>
-        <el-table-column  property="type" label="类型"></el-table-column>
-        <el-table-column  property="description" label="描述"></el-table-column>
-      </el-table>
-      <el-button slot="reference">{{value}}</el-button>
-    </el-popover>
+  <el-popover
+    placement="top-start"
+    width="1000"
+    trigger="hover">
+    <table>
+      <tr>
+        <th>key</th>
+        <th>类型</th>
+        <th>描述</th>
+        <th>值</th>
+      </tr>
+      <tr v-for="param of gridData" :key="param.key" style="height: 40px">
+        <td v-if="param.type==='object'" style="text-align: center;font-weight: bolder">
+          <params-object v-model="param.key" :tip="param"></params-object>
+        </td>
+        <td v-else style="text-align: center;font-weight: normal">{{param.key}}</td>
+        <td style="text-align: center;font-weight: normal">{{param.type}}</td>
+        <td style="text-align: center;font-weight: normal">{{param.description}}</td>
+        <td v-if="param.type==='date'">
+          <param-date v-model="param.value" @input="getValues"/>
+        </td>
+        <td v-else>
+          <el-input v-model="param.value" @input="getValues"></el-input>
+        </td>
+      </tr>
+    </table>
+    <el-button slot="reference">{{value}}</el-button>
+  </el-popover>
 </template>
 
 <script>
+  import ParamDate from "./param-date";
+  import {jsonParse} from '../common/json'
+
   export default {
     name: "params-object",
+    components: {ParamDate},
     props: ['value', 'tip'],
     data() {
+      this.tip.children.forEach(v => {
+        v.value = null;
+        v.isSelected = true;
+      });
       return {
-        gridData: this.tip
+        gridData: this.tip.children
       };
+    },
+    methods: {
+      getValues: function () {
+        let values = this.tip.children.map(x => {
+          let o = {};
+          if (x.value) {
+            o[x.key] = jsonParse(x.value);
+          }
+          return o;
+        }).reduce((pre, next) => {
+          return Object.assign(pre, next);
+        }, {});
+        this.tip.value = JSON.stringify(values);
+      }
     }
   };
 </script>
@@ -54,4 +93,5 @@
     background-color: #c8c8c8;
     color: #ffffff;
   }
+
 </style>

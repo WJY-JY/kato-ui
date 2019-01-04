@@ -18,7 +18,7 @@
             </el-checkbox>
           </td>
           <td v-if="param.type==='object'" style="text-align: center;font-weight: bolder">
-            <params-object v-model="param.name" :tip="param.children"></params-object>
+            <params-object v-model="param.name" :tip="param"></params-object>
           </td>
           <td v-else style="text-align: center;font-weight: normal">{{param.name}}</td>
           <td style="text-align: center;font-weight: normal">{{param.type}}</td>

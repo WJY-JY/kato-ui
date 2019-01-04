@@ -125,7 +125,7 @@
       getParams() {
         let params = this.stub.method.parameters;
         let validate = this.stub.method.validate;
-        let result = []
+        let result = [];
         for (let i = 0; i < params.length; i++) {
           result.push({
             isSelected: true,
