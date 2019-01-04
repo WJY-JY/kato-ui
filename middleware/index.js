@@ -9,13 +9,13 @@ if (_DEV_) {
     stats: 'errors-only',
     hot: true
   });
-  const hotMiddleware = require('webpack-hot-middleware')(compiler);
+  // const hotMiddleware = require('webpack-hot-middleware')(compiler);
   fileServer = (req, res) => {
     devMiddleware(req, res, () => {
-      hotMiddleware(req, res, () => {
-        res.writeHead(404);
-        res.end('Not Found!!!')
-      })
+      // hotMiddleware(req, res, () => {
+      //   res.writeHead(404);
+      //   res.end('Not Found!!!')
+      // })
     })
   }
 } else {
