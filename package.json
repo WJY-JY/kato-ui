@@ -38,7 +38,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "kato-client": "0.0.2",
-    "kato-server": "^1.0.0",
+    "kato-server": "git://github.com/WJY-JY/kato-node.git#v1.0.1",
     "loose-json": "^1.1.2",
     "lowdb": "^1.0.0",
     "node-sass": "^4.10.0",
