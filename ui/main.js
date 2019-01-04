@@ -17,7 +17,7 @@ Vue.config.productionTip = false;
   //引入kato-client,api的baseurl在ui的上一层
   const apiUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/ui')) + '/';
   Vue.use(await getAPIClient(apiUrl));
-  //引入数据库插件
+  // 引入数据库插件
   Vue.use(await getDatabase());
 
   //引入element-ui

@@ -13,6 +13,7 @@ export async function getAPIClient(apiUrl) {
   const res = await client.dispatcher({url: client.baseUrl + 'stub-api.json'});
   client.validate = JSON.parse(res.data);
 
+
   return {
     install(Vue) {
       Vue.prototype.$api = client;
