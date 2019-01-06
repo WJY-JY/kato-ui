@@ -1,5 +1,5 @@
 {
-  "name": "kato-ui-extend",
+  "name": "kato-ui",
   "version": "2.0.01",
   "description": "kato debug ui",
   "main": "./dist/middleware/index.js",
@@ -38,7 +38,7 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "kato-client": "0.0.2",
-    "kato-server": "git://github.com/WJY-JY/kato-node.git#v1.0.1",
+    "kato-server": "git://github.com/WJY-JY/kato-node.git#v2.0.02",
     "loose-json": "^1.1.2",
     "lowdb": "^1.0.0",
     "node-sass": "^4.10.0",
