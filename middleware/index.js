@@ -9,13 +9,13 @@ if (_DEV_) {
     stats: 'errors-only',
     hot: true
   });
-  // const hotMiddleware = require('webpack-hot-middleware')(compiler);
+  const hotMiddleware = require('webpack-hot-middleware')(compiler);
   fileServer = (req, res) => {
     devMiddleware(req, res, () => {
-      // hotMiddleware(req, res, () => {
-      //   res.writeHead(404);
-      //   res.end('Not Found!!!')
-      // })
+      hotMiddleware(req, res, () => {
+        res.writeHead(404);
+        res.end('Not Found!!!')
+      })
     })
   }
 } else {
@@ -26,12 +26,19 @@ if (_DEV_) {
 }
 
 export async function KatoUI(ctx, next) {
-  let {req, res} = ctx;
+  const {req, res} = ctx;
   if (req.url.startsWith('/ui/')) {
+    //禁止respond中间件的处理,其实KatoUI肯定在respond中间件前
+    ctx.bypassing = true;
     //裁剪url
     req.url = req.url.substr('/ui'.length, req.url.length);
     fileServer(req, res);
+    await new Promise(resolve => {
+      res.on('finish', () => resolve())
+    });
   } else if (req.url === "/stub-api.json") {
+    //禁止respond中间件的处理,其实KatoUI肯定在respond中间件前
+    ctx.bypassing = true;
     // 获取ui需要的接口信息
     const stub = {
       modules: []
