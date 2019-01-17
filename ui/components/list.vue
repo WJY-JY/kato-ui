@@ -77,9 +77,9 @@
               .filter(it => (it.name.toLowerCase().includes(this.filter.trim().toLowerCase())))
               .map(method => ({
                 name: method.name
-              }))
+              })).sort((a, b) => a.name.localeCompare(b.name))
           }))
-          .filter(module => module.methods.length > 0)
+          .filter(module => module.methods.length > 0).sort((a, b) => a.name.localeCompare(b.name));
       },
       isOpened() {
         if (this.filter !== '') {

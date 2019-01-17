@@ -1,6 +1,6 @@
 import {validate, should} from "kato-server/dist";
 
-export default class Test {
+export default class Best3 {
 
   @validate(should.object({
       k1: should.string().example("example1").description("测试yi"),
@@ -25,11 +25,11 @@ export default class Test {
       k3: new Date()
     }),
     should.example(1).description("页码"), null, should.date().description("日期"))
-  list(obj, pageNo, pageSize, date1, date2) {
+  plist(obj, pageNo, pageSize, date1, date2) {
     return {obj, pageNo, pageSize, date1, date2}
   }
 
-  list2(obj, date, test) {
+  ist2(obj, date, test) {
     return {obj, date, test}
   }
 }
